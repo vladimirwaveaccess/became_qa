@@ -11,5 +11,4 @@ class ConfigFromEnvProvider(BaseConfigKeyProvider):
         Returns config value for the given key
         :param str key: Key to retrieve
         """
-        val = os.environ.get(key)
-        return val
+        return os.environ.get(key)

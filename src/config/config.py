@@ -10,18 +10,19 @@ class Config:
     def __init__(self) -> None:
         self.conf_dict = {}
 
-        target = os.environ.get('TARGET')
-        if target is None:
-            target = Config.default_env
+        env = os.environ.get('ENV')
+        if env is None:
+            env = Config.default_env
 
-        json_path = f"src/config/env_configs/{target}.json"
+        json_path = f"src/config/env_configs/{env}.json"
 
         self.providers = [
             ConfigFromSimpleJsonProvider(json_path),
             ConfigFromEnvProvider(),
             ]
 
-        self.register("BASE_URL")
+        self.register("BASE_URL_API")
+        self.register("BASE_URL_UI")
 
     def register(self, name):
         """
@@ -31,22 +32,23 @@ class Config:
 
         # Order in self.provider makes difference
         for provider in self.providers:
-            val = provider.get(name)
-
-            if val is not None:
-                self.conf_dict[name] = val
+            if provider.get(name) is not None:
+                self.conf_dict[name] = provider.get(name)
 
         # raise error if no value is found across the providers
-        if self.conf_dict[name] is None:
+        if self.conf_dict.get(name) is None:
             raise Exception(f"{name} variable is not set in config")
 
-        print(f"{name} variable is registered in config with value {self.conf_dict[name]}")
+        print(f"{name} variable is registered in config with value {self.conf_dict.get(name)}")
 
     def get(self, name):
         """
         Return existing value
         """
-        return self.conf_dict[name]
+        if self.conf_dict.get(name) is None:
+            raise Exception(f"{name} variable is not set in config")
+
+        return self.conf_dict.get(name)
 
 
 # python way singleton

@@ -1,3 +1,4 @@
 {
-  "BASE_URL": "https://github.com/vladimirwaveaccess/became_qa"
+  "BASE_URL_API": "https://github.com/vladimirwaveaccess/became_qa",
+  "BASE_URL_UI": "https://github.com/vladimirwaveaccess/became_qa_java"
 }
