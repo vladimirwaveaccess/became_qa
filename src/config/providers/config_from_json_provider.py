@@ -2,6 +2,7 @@ import json
 from src.config.providers.base_config import BaseConfigKeyProvider
 
 
+# BaseConfigKeyProvider usage is optional
 class ConfigFromSimpleJsonProvider(BaseConfigKeyProvider):
     """
     Allows configuration through the JSON file
@@ -18,4 +19,6 @@ class ConfigFromSimpleJsonProvider(BaseConfigKeyProvider):
         Returns config value for the given key
         :param str key: Key to retrieve
         """
-        return self._config_data.get(key)
+        val = self._config_data.get(key)
+
+        return val

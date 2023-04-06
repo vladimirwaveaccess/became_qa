@@ -7,15 +7,16 @@ from src.config.providers.config_from_json_provider import ConfigFromSimpleJsonP
 class Config:
     default_env = "dev"
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.conf_dict = {}
 
-        env = os.environ.get('ENV')
-        if env is None:
-            env = Config.default_env
+        target = os.environ.get('TARGET')
+        if target is None:
+            target = Config.default_env
 
-        json_path = f"src/config/env_configs/{env}.json"
+        json_path = f"src/config/env_configs/{target}.json"
 
+        # Hierarhy of providers
         self.providers = [
             ConfigFromSimpleJsonProvider(json_path),
             ConfigFromEnvProvider(),
@@ -23,6 +24,8 @@ class Config:
 
         self.register("BASE_URL_API")
         self.register("BASE_URL_UI")
+        self.register("USERNAME")
+        self.register("PASSWORD")
 
     def register(self, name):
         """
@@ -32,20 +35,24 @@ class Config:
 
         # Order in self.provider makes difference
         for provider in self.providers:
-            if provider.get(name) is not None:
-                self.conf_dict[name] = provider.get(name)
+            val = provider.get(name)
+
+            if val is not None:
+                self.conf_dict[name] = val
 
         # raise error if no value is found across the providers
-        if self.conf_dict.get(name) is None:
+        val = self.conf_dict.get(name)
+        if val is None:
             raise Exception(f"{name} variable is not set in config")
 
-        print(f"{name} variable is registered in config with value {self.conf_dict.get(name)}")
+        print(f"{name} variable is registered in config with value {val}")
 
     def get(self, name):
         """
         Return existing value
         """
-        if self.conf_dict.get(name) is None:
+        val = self.conf_dict.get(name)
+        if val is None:
             raise Exception(f"{name} variable is not set in config")
 
         return self.conf_dict.get(name)

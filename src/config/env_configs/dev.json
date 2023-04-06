@@ -1,4 +1,6 @@
-{
-  "BASE_URL_API": "https://github.com/vladimirwaveaccess/became_qa",
-  "BASE_URL_UI": "https://github.com/vladimirwaveaccess/became_qa_java"
+ {
+    "BASE_URL_API": "https://api.github.com",
+    "BASE_URL_UI": "https://github.com/login",
+    "USERNAME": "johndoe",
+    "PASSWORD": "qwerty123456"
 }

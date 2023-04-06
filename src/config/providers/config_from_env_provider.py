@@ -2,6 +2,7 @@ import os
 from src.config.providers.base_config import BaseConfigKeyProvider
 
 
+# BaseConfigKeyProvider usage is optional
 class ConfigFromEnvProvider(BaseConfigKeyProvider):
     """
     Allows configuration through the env variables.
