@@ -14,8 +14,7 @@ class GitHubApiClient:
         body = requests.get(
             url=self._form_url(URL_SEARCH_REPO),
             params={'q': repo_name},
-            timeout=3000,
-            # headers=f"Authorization: Bearer {self.token}"
+            timeout=3000
         )
         return body.json()
 
@@ -23,17 +22,16 @@ class GitHubApiClient:
         """Request method for search without param"""
         body = requests.get(
             url=self._form_url(URL_SEARCH_REPO),
-            timeout=3000,
-            # headers=f"Authorization: Bearer {self.token}"
+            timeout=3000
         )
         return body.json()
 
     def login(self, username, password):
         print(f"Do login with {username}:{password}")
-        self.token = "sdkfjbkjsdf"
+        self.token = "test_token"
 
-    def logout(self):
-        print("Do logout for")
+    def logout(self, username):
+        print(f"Do logout for {username}")
 
     def _form_url(self, url):
         return config.get("BASE_URL_API") + url

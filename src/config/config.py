@@ -35,24 +35,20 @@ class Config:
 
         # Order in self.provider makes difference
         for provider in self.providers:
-            val = provider.get(name)
-
-            if val is not None:
-                self.conf_dict[name] = val
+            if provider.get(name) is not None:
+                self.conf_dict[name] = provider.get(name)
 
         # raise error if no value is found across the providers
-        val = self.conf_dict.get(name)
-        if val is None:
+        if self.conf_dict.get(name) is None:
             raise Exception(f"{name} variable is not set in config")
 
-        print(f"{name} variable is registered in config with value {val}")
+        print(f"{name} variable is registered in config with value {self.conf_dict.get(name)}")
 
     def get(self, name):
         """
         Return existing value
         """
-        val = self.conf_dict.get(name)
-        if val is None:
+        if self.conf_dict.get(name) is None:
             raise Exception(f"{name} variable is not set in config")
 
         return self.conf_dict.get(name)
