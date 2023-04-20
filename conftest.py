@@ -1,14 +1,15 @@
 import pytest
 
+from src.providers.service.browsers.browsers_provider import BrowsersProvider
 from src.applications.api.github_api_client import GitHubApiClient
 from src.applications.ui.github_ui_app import GitHubUI
-from src.config.config import config
+from src.config.config import CONFIG
 
 
 @pytest.fixture
 def github_api_client():
     github_api_client = GitHubApiClient()
-    github_api_client.login(config.get("USERNAME"), config.get("PASSWORD"))
+    github_api_client.login(CONFIG.get("USERNAME"), CONFIG.get("PASSWORD"))
 
     yield github_api_client
 
@@ -17,10 +18,11 @@ def github_api_client():
 
 @pytest.fixture
 def github_ui_client():
-    github_ui_client = GitHubUI()
+    browser = CONFIG.get("BROWSER")
+    driver = BrowsersProvider.get_driver(browser)
 
-    github_ui_client.launch()
+    ui_client = GitHubUI(driver)
 
-    yield github_ui_client
+    yield ui_client
 
-    github_ui_client.close()
+    ui_client.quit()

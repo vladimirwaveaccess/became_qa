@@ -1,6 +1,6 @@
 import requests
 
-from src.config.config import config
+from src.config.config import CONFIG
 from src.data.local_links import URL_SEARCH_REPO
 
 
@@ -14,16 +14,22 @@ class GitHubApiClient:
         body = requests.get(
             url=self._form_url(URL_SEARCH_REPO),
             params={'q': repo_name},
+            headers={"Authorization": f"Bearer {self.token}"},
             timeout=3000
         )
+        if CONFIG.get("DEBUG_MODE"):
+            print(body)
         return body.json()
 
     def search_repo_without_param(self):
         """Request method for search without param"""
         body = requests.get(
             url=self._form_url(URL_SEARCH_REPO),
+            headers={"Authorization": f"Bearer {self.token}"},
             timeout=3000
         )
+        if CONFIG.get("DEBUG_MODE"):
+            print(body)
         return body.json()
 
     def login(self, username, password):
@@ -34,4 +40,4 @@ class GitHubApiClient:
         print(f"Do logout for {username}")
 
     def _form_url(self, url):
-        return config.get("BASE_URL_API") + url
+        return CONFIG.get("BASE_URL_API") + url

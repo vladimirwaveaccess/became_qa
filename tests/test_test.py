@@ -1,14 +1,14 @@
-from src.config.config import config
+from src.config.config import CONFIG
 
 
 def test_http_request():
-    print(f'BASE_URL_API = {config.get("BASE_URL_API")}')
-    print(f'USERNAME = {config.get("USERNAME")}')
-    print(f'PASSWORD = {config.get("PASSWORD")}')
+    print(f'BASE_URL_API = {CONFIG.get("BASE_URL_API")}')
+    print(f'USERNAME = {CONFIG.get("USERNAME")}')
+    print(f'PASSWORD = {CONFIG.get("PASSWORD")}')
 
 
 def test_ui_pom():
-    print(f'BASE_URL_UI = {config.get("BASE_URL_UI")}')
-    print(f'USERNAME = {config.get("USERNAME")}')
-    print(f'PASSWORD = {config.get("PASSWORD")}')
+    print(f'BASE_URL_UI = {CONFIG.get("BASE_URL_UI")}')
+    print(f'USERNAME = {CONFIG.get("USERNAME")}')
+    print(f'PASSWORD = {CONFIG.get("PASSWORD")}')
 
