@@ -17,14 +17,14 @@ class Config:
 
         json_path = f"src/config/env_configs/{target}.json"
 
-        # Hierarhy of providers
+        # Hierarchy of providers
         self.providers = [
             ConfigFromSimpleJsonProvider(json_path),
             ConfigFromEnvProvider(),
             ConfigFromDefaultsProvider({
                 "DEBUG_MODE": True,
                 "BROWSER": 'chrome',
-                "UI_TIMEOUTS": 30000,
+                "UI_TIMEOUTS": 30,
             })
             ]
 

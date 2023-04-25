@@ -15,7 +15,7 @@ class Test_config_env_provider_positive():
         self.val = conf.get("PATH")
 
     def test_val(self):
-        assert self.val == "/home/sbutenko/.poetry/bin:/home/sbutenko/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+        assert self.val == "/home/vladimirwaveaccess/.poetry/bin:/home/vladimirwaveaccess/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 
     def test_check(self):
         assert self.val.check()

@@ -6,25 +6,22 @@ from src.config.config import CONFIG
 class LoginPage:
     URL = "/login"
 
-    USERNAME_FLD = "login_field"  # id
-    PASSWORD_FLD = "password"  # id
-    SIGN_IN_BTN = "commit"  # name
+    USERNAME_FLD = (By.ID, "login_field")
+    PASSWORD_FLD = (By.ID, "password")
+    SIGN_IN_BTN = (By.NAME, "commit")
+    ERROR_MESSAGE = (By.XPATH, "div[contains(text(),'Incorrect username or password.')]")
 
     def __init__(self, app) -> None:
         self.app = app
 
     def go_to(self):
-        self.app.driver.get(CONFIG.get("BASE_URL_UI") + LoginPage.URL)
+        self.app.go_to(CONFIG.get("BASE_URL_UI") + LoginPage.URL)
 
     def try_sign_in(self, username, password):
-        username_fld = self.app.driver.find_element(By.ID, LoginPage.USERNAME_FLD)
-        username_fld.send_keys(username)
+        self.app.type_text(LoginPage.USERNAME_FLD, username)
+        self.app.type_text(LoginPage.PASSWORD_FLD, password)
 
-        password_fld = self.app.driver.find_element(By.ID, LoginPage.PASSWORD_FLD)
-        password_fld.send_keys(password)
-
-        sign_in_btn = self.app.driver.find_element(By.NAME, LoginPage.SIGN_IN_BTN)
-        sign_in_btn.click()
+        self.app.click(LoginPage.SIGN_IN_BTN)
 
         time.sleep(5)
 
@@ -41,5 +38,4 @@ class LoginPage:
         pass
 
     def check_error_message(self):
-        error_msg = self.app.driver.find_element(By.XPATH, "//div[contains(text(),'Incorrect username or password.')]").text
-        return error_msg == "Error"
+        self.app.error_message(LoginPage.ERROR_MESSAGE)

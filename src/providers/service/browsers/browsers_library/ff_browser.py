@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
@@ -9,7 +10,8 @@ class FFBrowser:
 
     @staticmethod
     def get_driver():
-        options = None
+        options = Options()
+        options.page_load_strategy = 'normal'
 
         if CONFIG.get("DEBUG_MODE") is False:
             options.add_argument('--headless')

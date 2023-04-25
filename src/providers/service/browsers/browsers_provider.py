@@ -22,4 +22,3 @@ class BrowsersProvider:
 
         driver = browser.get_driver()
         return driver
-
