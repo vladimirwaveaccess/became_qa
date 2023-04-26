@@ -14,7 +14,7 @@ class GitHubApiClient:
         body = requests.get(
             url=self._form_url(URL_SEARCH_REPO),
             params={'q': repo_name},
-            headers={"Authorization": f"Bearer {self.token}"},
+            #headers={"Authorization": f"Bearer {self.token}"},
             timeout=3000
         )
         if CONFIG.get("DEBUG_MODE"):
@@ -25,7 +25,7 @@ class GitHubApiClient:
         """Request method for search without param"""
         body = requests.get(
             url=self._form_url(URL_SEARCH_REPO),
-            headers={"Authorization": f"Bearer {self.token}"},
+            #headers={"Authorization": f"Bearer {self.token}"},
             timeout=3000
         )
         if CONFIG.get("DEBUG_MODE"):

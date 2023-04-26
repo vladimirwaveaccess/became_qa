@@ -8,7 +8,7 @@ def test_config_env_provider_negative():
     assert val is None
 
 
-class Test_config_env_provider_positive():
+class test_config_env_provider_positive():
     # better approach
     def __init__(self) -> None:
         conf = ConfigFromEnvProvider()

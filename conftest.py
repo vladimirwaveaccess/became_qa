@@ -13,7 +13,7 @@ def github_api_client():
 
     yield github_api_client
 
-    github_api_client.logout()
+    github_api_client.logout(CONFIG.get("USERNAME"))
 
 
 @pytest.fixture
